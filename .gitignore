@@ -1,0 +1,8 @@
+.idea/*
+composer.lock
+vendor/*
+demo/cache/*
+demo/logs/*
+!.gitkeep
+build/*
+coverage/*
