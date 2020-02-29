@@ -12,15 +12,15 @@ use KnotLib\Kernel\Exception\ModuleInstallationException;
 use KnotLib\Kernel\FileSystem\Dir;
 use KnotLib\Kernel\Kernel\ApplicationInterface;
 use KnotLib\Kernel\Logger\LoggerChannelInterface;
-use KnotLib\Kernel\Module\ComponentModule;
-use KnotLib\Kernel\Module\Components;
+use KnotLib\Kernel\Module\ModuleInterface;
+use KnotLib\Kernel\Module\ComponentTypes;
 use KnotLib\Logger\Logger\ConsoleLogger;
 use KnotLib\Logger\Logger\FileLogger;
 use KnotLib\Logger\LogManager;
 
 use KnotPhp\Module\KnotLogger\Adapter\KnotLoggerAdapter;
 
-class KnotLoggerModule extends ComponentModule
+class KnotLoggerModule implements ModuleInterface
 {
     const CONFIG_FILE   = 'logger.config.php';
 
@@ -28,14 +28,24 @@ class KnotLoggerModule extends ComponentModule
     private $route_map;
 
     /**
+     * Declare dependency on another modules
+     *
+     * @return array
+     */
+    public static function requiredModules() : array
+    {
+        return [];
+    }
+
+    /**
      * Declare dependent on components
      *
      * @return array
      */
-    public static function requiredComponents() : array
+    public static function requiredComponentTypes() : array
     {
         return [
-            Components::EVENTSTREAM,
+            ComponentTypes::EVENTSTREAM,
         ];
     }
 
@@ -46,7 +56,7 @@ class KnotLoggerModule extends ComponentModule
      */
     public static function declareComponentType() : string
     {
-        return Components::LOGGER;
+        return ComponentTypes::LOGGER;
     }
 
     /**
