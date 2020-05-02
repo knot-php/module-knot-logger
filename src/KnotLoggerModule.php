@@ -92,7 +92,6 @@ class KnotLoggerModule implements ModuleInterface
                 $type = $config['type'] ?? null;
                 $options = $config['options'] ?? [];
                 $route = $config['route'] ?? null;
-                $enabled = $config['enabled'] ?? false;
                 $logger = null;
                 switch($type)
                 {
@@ -117,8 +116,8 @@ class KnotLoggerModule implements ModuleInterface
                 }
                 $log_manager->register($name, $logger);
 
-                // By default, logger will be disabled. Specify 'enabled: true' in config, then the logger will be activated.
-                $logger->enable($enabled);
+                // By default, logger will be disabled.
+                $logger->enable(false);
 
                 if (is_string($route) && strlen($route) > 0){
                     $this->route_map[$route][] = $logger;       // add logger to route map logger list
