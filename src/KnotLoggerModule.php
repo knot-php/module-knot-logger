@@ -24,8 +24,8 @@ class KnotLoggerModule implements ModuleInterface
 {
     const CONFIG_FILE   = 'logger.config.php';
 
-    /** @var array */
-    private $route_map;
+    /** @var LogManager */
+    private $log_manager;
 
     /**
      * Declare dependency on another modules
@@ -80,8 +80,8 @@ class KnotLoggerModule implements ModuleInterface
             /** @noinspection PhpIncludeInspection */
             $config = require_once $config_file;
 
-            $log_manager = new LogManager($config['log_manager'] ?? []);
-            $app_logger =  new KnotLoggerAdapter($log_manager);
+            $this->log_manager = new LogManager($config['log_manager'] ?? []);
+            $app_logger =  new KnotLoggerAdapter($this->log_manager);
             $app->logger($app_logger);
 
             $event_channel->push(Events::LOGGER_ATTACHED, $app_logger);
@@ -91,7 +91,6 @@ class KnotLoggerModule implements ModuleInterface
             {
                 $type = $config['type'] ?? null;
                 $options = $config['options'] ?? [];
-                $route = $config['route'] ?? null;
                 $enabled = $config['enabled'] ?? false;
                 $logger = null;
                 switch($type)
@@ -115,14 +114,10 @@ class KnotLoggerModule implements ModuleInterface
                         throw new ModuleInstallationException(self::class, $reason);
                         break;
                 }
-                $log_manager->register($name, $logger);
+                $this->log_manager->register($name, $logger);
 
                 // By default, logger will be disabled. Specify 'enabled: true' in config, then the logger will be activated.
                 $logger->enable($enabled);
-
-                if (is_string($route) && strlen($route) > 0){
-                    $this->route_map[$route][] = $logger;       // add logger to route map logger list
-                }
 
                 $event_channel->push(Events::LOGGER_CHANNEL_CREATED, [
                         'name' => $name,
@@ -137,10 +132,10 @@ class KnotLoggerModule implements ModuleInterface
                 {
                     $data = $e->getPayload();
                     $route_name = $data['route_name'] ?? null;
-                    $logger_list = $this->route_map[$route_name] ?? null;
-                    if (is_array($logger_list)){
-                        foreach($logger_list as $logger){
-                            /** @var LoggerChannelInterface $logger */
+                    /** @var LoggerChannelInterface $logger */
+                    if (is_string($route_name) && !empty($route_name)){
+                        $logger = $this->log_manager->get($route_name);
+                        if ($logger){
                             $logger->enable(true);
                         }
                     }
