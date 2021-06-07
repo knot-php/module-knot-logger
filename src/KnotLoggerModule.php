@@ -1,24 +1,24 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\Module\KnotLogger;
+namespace knotphp\module\knotlogger;
 
-use Stk2k\EventStream\Event;
+use stk2k\eventstream\Event;
 
-use KnotLib\Kernel\EventStream\Channels;
-use KnotLib\Kernel\EventStream\Events;
-use KnotLib\Kernel\Exception\EventStreamException;
-use KnotLib\Kernel\Exception\ModuleInstallationException;
-use KnotLib\Kernel\FileSystem\Dir;
-use KnotLib\Kernel\Kernel\ApplicationInterface;
-use KnotLib\Kernel\Logger\LoggerChannelInterface;
-use KnotLib\Kernel\Module\ModuleInterface;
-use KnotLib\Kernel\Module\ComponentTypes;
-use KnotLib\Logger\Logger\ConsoleLogger;
-use KnotLib\Logger\Logger\FileLogger;
-use KnotLib\Logger\LogManager;
+use knotlib\kernel\eventstream\Channels;
+use knotlib\kernel\eventstream\Events;
+use knotlib\kernel\exception\EventStreamException;
+use knotlib\kernel\exception\ModuleInstallationException;
+use knotlib\kernel\filesystem\Dir;
+use knotlib\kernel\kernel\ApplicationInterface;
+use knotlib\kernel\logger\LoggerChannelInterface;
+use knotlib\kernel\module\ModuleInterface;
+use knotlib\kernel\module\ComponentTypes;
+use knotlib\logger\logger\ConsoleLogger;
+use knotlib\logger\logger\FileLogger;
+use knotlib\logger\LogManager;
 
-use KnotPhp\Module\KnotLogger\Adapter\KnotLoggerAdapter;
+use KnotPhp\Module\KnotLogger\Adapter2\KnotLoggerAdapter;
 
 class KnotLoggerModule implements ModuleInterface
 {

@@ -1,8 +1,10 @@
 .idea/*
 composer.lock
 vendor/*
-demo/cache/*
-demo/logs/*
 !.gitkeep
 build/*
 coverage/*
+logs/*
+sample/cache/*
+sample/.htaccess
+.phpunit.result.cache

@@ -12,26 +12,25 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.2",
     "psr/log": "^1.0",
-    "stk2k/eventstream": "~0.7",
-    "knot-lib/logger": "~0.1",
-    "knot-lib/kernel": "~0.1",
-    "knot-lib/module": "~0.1"
+    "stk2k/eventstream": "~0.9",
+    "knot-lib/logger": "~0.2",
+    "knot-lib/kernel": "~0.8",
+    "knot-lib/module": "~0.7"
   },
   "require-dev": {
-    "phpunit/phpunit": "^6.3.0",
+    "phpunit/phpunit": "^8.5.15",
     "php-coveralls/php-coveralls": "^2.0"
   },
   "autoload": {
     "psr-4": {
-      "KnotPhp\\Module\\KnotLogger\\": "src/"
+      "knotphp\\module\\knotlogger\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "KnotPhp\\Module\\KnotLogger\\Test\\": "test/include/",
-      "KnotPhp\\Module\\KnotLogger\\Demo\\": "demo/include/"
+      "knotphp\\module\\knotlogger\\test\\": "test/"
     }
   }
 }

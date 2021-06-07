@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\Module\KnotLogger\Adapter;
+namespace knotphp\module\knotlogger\adapter;
 
 use Psr\Log\LoggerTrait;
 use Psr\Log\LogLevel as PsrLogLevel;
 
-use KnotLib\Logger\LoggerInterface as CalgamoLoggerInterface;
-use KnotLib\Logger\LogMessage;
-use KnotLib\Kernel\Logger\LoggerChannelInterface;
+use knotlib\logger\LoggerInterface as CalgamoLoggerInterface;
+use knotlib\logger\LogMessage;
+use knotlib\kernel\logger\LoggerChannelInterface;
 
 class KnotLoggerChannelAdapter implements LoggerChannelInterface
 {
